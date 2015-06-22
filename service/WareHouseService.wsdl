@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/WareHouseService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WareHouseService" targetNamespace="http://www.example.org/WareHouseService/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/WareHouseService/">
+      <xsd:element name="checkAvailability">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="quantity" type="xsd:int" />
+          	<xsd:element name="productId" type="xsd:int"></xsd:element>
+          	<xsd:element name="customerId" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkAvailabilityResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="isAvailable" type="xsd:boolean" />
+          	<xsd:element name="availabilityType" type="xsd:string"></xsd:element>
+          	<xsd:element name="customerId" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="checkAvailabilityFault">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="checkAvailabilityFault"
+      				type="xsd:string">
+      			</xsd:element>
+      			<xsd:element name="customerid" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="freeProduct">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="productId" type="xsd:int"></xsd:element>
+      			<xsd:element name="orderid" type="xsd:string"></xsd:element>
+      			<xsd:element name="warehouseid" type="xsd:int"></xsd:element>
+      			<xsd:element name="quantity" type="xsd:int"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="freeProductResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="isFree" type="xsd:boolean"></xsd:element>
+      			<xsd:element name="orderid" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="freeProductFault">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="freeProductFault"
+      				type="xsd:string">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reserveProduct">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="productId" type="xsd:int"></xsd:element>
+      			<xsd:element name="warehouseid" type="xsd:int"></xsd:element>
+      			<xsd:element name="quantity" type="xsd:int"></xsd:element>
+      			<xsd:element name="orderid" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reserveProductResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="isReserved" type="xsd:boolean"></xsd:element>
+      			<xsd:element name="orderid" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reserveProductFault">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="reserveProductFault"
+      				type="xsd:string">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="checkAvailabilityRequest">
+    <wsdl:part element="tns:checkAvailability" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="checkAvailabilityResponse">
+    <wsdl:part element="tns:checkAvailabilityResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="checkAvailabilityFault">
+  	<wsdl:part name="parameters" element="tns:checkAvailabilityFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="freeProductRequest">
+  	<wsdl:part name="parameters" element="tns:freeProduct"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="freeProductResponse">
+  	<wsdl:part name="parameters" element="tns:freeProductResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="freeProductFault">
+  	<wsdl:part name="parameters" element="tns:freeProductFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserveProductRequest">
+  	<wsdl:part name="parameters" element="tns:reserveProduct"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserveProductResponse">
+  	<wsdl:part name="parameters" element="tns:reserveProductResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserveProductFault">
+  	<wsdl:part name="parameters" element="tns:reserveProductFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WareHouseService">
+    <wsdl:operation name="checkAvailability">
+      <wsdl:input message="tns:checkAvailabilityRequest"/>
+      <wsdl:output message="tns:checkAvailabilityResponse"/>
+            <wsdl:fault name="fault" message="tns:checkAvailabilityFault"></wsdl:fault>
+        </wsdl:operation>
+    <wsdl:operation name="freeProduct">
+    	<wsdl:input message="tns:freeProductRequest"></wsdl:input>
+    	<wsdl:output message="tns:freeProductResponse"></wsdl:output>
+            <wsdl:fault name="fault" message="tns:freeProductFault"></wsdl:fault>
+        </wsdl:operation>
+    <wsdl:operation name="reserveProduct">
+    	<wsdl:input message="tns:reserveProductRequest"></wsdl:input>
+    	<wsdl:output message="tns:reserveProductResponse"></wsdl:output>
+            <wsdl:fault name="fault" message="tns:reserveProductFault"></wsdl:fault>
+        </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WareHouseServiceSOAP"
+  	type="tns:WareHouseService">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="checkAvailability">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/WareHouseService/checkAvailability" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  		<wsdl:fault name="fault">
+
+  			<soap:fault use="literal" name="fault" />
+  		</wsdl:fault>
+  	</wsdl:operation>
+  	<wsdl:operation name="freeProduct">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/WareHouseService/freeProduct" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  		<wsdl:fault name="fault">
+
+  			<soap:fault use="literal" name="fault" />
+  		</wsdl:fault>
+  	</wsdl:operation>
+  	<wsdl:operation name="reserveProduct">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/WareHouseService/reserveProduct" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  		<wsdl:fault name="fault">
+
+  			<soap:fault use="literal" name="fault" />
+  		</wsdl:fault>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WareHouseService">
+    <wsdl:port binding="tns:WareHouseServiceSOAP" name="WareHouseServiceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
